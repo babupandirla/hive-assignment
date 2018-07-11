@@ -1,0 +1,82 @@
+hive>  create table temperature_data
+    >  (
+    > full_date STRING,
+    >  zip INT,
+    >  temperature INT
+    >  )
+    > row format DELIMITED 
+    > fields terminated by ',';
+OK
+Time taken: 1.669 seconds
+hive> LOAD DATA LOCAL INPATH '/hibetemp.txt'
+    > INTO TABLE custom.temperature_data;
+FAILED: SemanticException Line 1:23 Invalid path ''/hibetemp.txt'': No files matching path file:/hibetemp.txt
+hive> LOAD DATA LOCAL INPATH '/hivetemp.txt'
+    > INTO TABLE custom.temperature_data;
+FAILED: SemanticException Line 1:23 Invalid path ''/hivetemp.txt'': No files matching path file:/hivetemp.txt
+hive> LOAD DATA LOCAL INPATH 'hivetemp.txt'
+    > INTO TABLE custom.temperature_data;
+Loading data to table custom.temperature_data
+OK
+Time taken: 3.04 seconds
+hive> select *from custom.temperature_data;
+OK
+10-01-1990	123112	10
+14-02-1991	283901	11
+10-03-1990	381920	15
+10-01-1991	302918	22
+12-02-1990	384902	9
+10-01-1991	123112	11
+14-02-1990	283901	12
+10-03-1991	381920	16
+10-01-1990	302918	23
+12-02-1991	384902	10
+10-01-1993	123112	11
+14-02-1994	283901	12
+10-03-1993	381920	16
+10-01-1994	302918	23
+12-02-1991	384902	10
+10-01-1991	123112	11
+14-02-1990	283901	12
+10-03-1991	381920	16
+10-01-1990	302918	23
+12-02-1991	384902	10
+	NULL	NULL
+Time taken: 5.442 seconds, Fetched: 21 row(s)
+hive> select *from custom.temperature_data where zip>300000 AND zip<399999;
+OK
+10-03-1990	381920	15
+10-01-1991	302918	22
+12-02-1990	384902	9
+10-03-1991	381920	16
+10-01-1990	302918	23
+12-02-1991	384902	10
+10-03-1993	381920	16
+10-01-1994	302918	23
+12-02-1991	384902	10
+10-03-1991	381920	16
+10-01-1990	302918	23
+12-02-1991	384902	10
+Time taken: 1.766 seconds, Fetched: 12 row(s)
+hive>  select full_date,temperature from custom.temperature_data where zip>300000 AND zip<399999;
+OK
+10-03-1990	15
+10-01-1991	22
+12-02-1990	9
+10-03-1991	16
+10-01-1990	23
+12-02-1991	10
+10-03-1993	16
+10-01-1994	23
+12-02-1991	10
+10-03-1991	16
+10-01-1990	23
+12-02-1991	10
+Time taken: 0.649 seconds, Fetched: 12 row(s)
+
+
+
+
+
+
+
