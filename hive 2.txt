@@ -1,0 +1,59 @@
+insert overwrite local DIRECTORY 'hivetemp.txt'
+    > row FORMAT  DELIMITED 
+    > FIELDS TERMINATED BY '|'
+    > select *from custom.temperature_data;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+Query ID = acadgild_20180626145129_ef753e9e-fa1a-4047-abc6-46b3600f1858
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1529976592293_0083, Tracking URL = http://localhost:8088/proxy/application_1529976592293_0083/
+Kill Command = /home/acadgild/install/hadoop/hadoop-2.6.5/bin/hadoop job  -kill job_1529976592293_0083
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2018-06-26 14:51:57,764 Stage-1 map = 0%,  reduce = 0%
+2018-06-26 14:52:18,533 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 3.17 sec
+MapReduce Total cumulative CPU time: 3 seconds 170 msec
+Ended Job = job_1529976592293_0083
+Moving data to local directory hivetemp.txt
+Failed with exception Unable to move source hdfs://localhost:8020/tmp/hive/acadgild/0a5ece70-aedb-4a73-a9ae-20e28fd389aa/hive_2018-06-26_14-51-29_141_1216684237416651455-1/-mr-10000 to destination hivetemp.txt
+FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.MoveTask. Unable to move source hdfs://localhost:8020/tmp/hive/acadgild/0a5ece70-aedb-4a73-a9ae-20e28fd389aa/hive_2018-06-26_14-51-29_141_1216684237416651455-1/-mr-10000 to destination hivetemp.txt
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 3.17 sec   HDFS Read: 4100 HDFS Write: 426 SUCCESS
+Total MapReduce CPU Time Spent: 3 seconds 170 msec
+hive> 
+You have new mail in /var/spool/mail/acadgild
+[acadgild@localhost ~]$ cd hivenew.txt
+[acadgild@localhost hivenew.txt]$ ll
+total 4
+-rw-r--r--. 1 acadgild acadgild 426 Jun 26 14:57 000000_0
+[acadgild@localhost hivenew.txt]$ cat 000000_0
+10-01-1990|123112|10
+14-02-1991|283901|11
+10-03-1990|381920|15
+10-01-1991|302918|22
+12-02-1990|384902|9
+10-01-1991|123112|11
+14-02-1990|283901|12
+10-03-1991|381920|16
+10-01-1990|302918|23
+12-02-1991|384902|10
+10-01-1993|123112|11
+14-02-1994|283901|12
+10-03-1993|381920|16
+10-01-1994|302918|23
+12-02-1991|384902|10
+10-01-1991|123112|11
+14-02-1990|283901|12
+10-03-1991|381920|16
+10-01-1990|302918|23
+12-02-1991|384902|10
+|\N|\N
+[acadgild@localhost hivenew.txt]$ 
+
+
+
+
+
+
+
+
